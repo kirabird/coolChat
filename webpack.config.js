@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
 
-  entry: './client/index.js',
+  entry: './client/index.jsx',
   mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -18,19 +18,23 @@ module.exports = {
             presets: [
               '@babel/preset-react',
               '@babel/preset-env',
-              {
-                plugins: [
-                  '@babel/plugin-proposal-class-properties'
-                ]
-              }
-            ]
-          }
-        }
-      }
-    ]
+            ],
+            plugins: [
+              '@babel/plugin-proposal-class-properties',
+            ],
+          },
+        },
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   devServer: {
     publicPath: '/dist/',
-    hot: true
-  }
-}
+    hot: true,
+    historyApiFallback: {
+      index: 'index.html',
+    },
+  },
+};
