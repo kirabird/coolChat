@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 const styles = {
   container: {
     display: 'flex',
-    padding: '20px',
+    marginLeft: '20px',
   },
   username: {
     flexGrow: 1,
@@ -19,11 +19,11 @@ const Msg = (props) => {
   const { username, message } = props;
   return (
     <div className="message" style={styles.container}>
-      <Typography style={styles.username} variant="p" color="inherit">
+      <Typography style={styles.username} variant="body2" color="inherit">
         {username}
       </Typography>
-      <Typography style={styles.message} variant="p" color="inherit">
-        { message }
+      <Typography style={styles.message} variant="body1" color="inherit">
+        {message}
       </Typography>
     </div>
   );

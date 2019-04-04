@@ -6,6 +6,7 @@ import { createMessage } from '../schema/mutations';
 
 const styles = {
   container: {
+    color: 'pink',
     display: 'flex',
     padding: '10px'
   },
@@ -58,8 +59,10 @@ class MessageBox extends Component {
                 newMsg({
                   variables: {
                     userId: 1,
-                    message: this.state.content
-                  }
+
+                    message: this.state.content,
+                  },
+
                 });
                 this.setState({ content: '' });
               }}
