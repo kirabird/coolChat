@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+// import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import AuthContainer from './components/AuthContainer';
 import Header from './components/Header';
 import ChatroomContainer from './components/ChatroomContainer';
+import history from './history';
 
 class App extends Component {
   constructor(props) {
@@ -13,7 +15,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <div id='app'>
           <Header />
           <div>

@@ -17,7 +17,7 @@ IF NOT EXISTS messages
   "chatroom_id" INTEGER NOT NULL,
   FOREIGN KEY
 ("user_id")
-  REFERENCES usersm
+  REFERENCES users
 ("_id")
   ON
 DELETE CASCADE,
@@ -30,7 +30,7 @@ DELETE CASCADE
 CREATE TABLE
 IF NOT EXISTS chatrooms
 (
-  "_id" SERIAL PRIMARY KEY,
+  "_id" PRIMARY KEY DEFAULT 1,
   "chatroom_name" VARCHAR NOT NULL
 );
 

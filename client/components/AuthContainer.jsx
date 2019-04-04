@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import history from '../history';
 import { Mutation, Query } from 'react-apollo';
 import { login } from '../schema/mutations.js';
+// import { Router } from 'express';
 
 const styles = {
   container: {
@@ -87,21 +89,19 @@ class AuthContainer extends Component {
                         username: this.state.username,
                         password: this.state.password
                       }
-                    }).then(res => console.log(res))
+                    }).then(res => {
+                      if (res.data.login.success) {
+                        history.push('/chat');
+                      } else {
+                        return <h4>404</h4>;
+                      }
+                    })
                   }
                 >
                   Login
                 </Button>
               )}
             </Mutation>
-
-            {/* <Link
-                to='/auth'
-                style={{ color: '#FFF', textDecoration: 'none' }}
-              >
-                {/* DELETED FROM LINE 72 to='/chat' */}
-            {/* Login */}
-            {/* </Link> */}
           </div>
         </form>
       </div>

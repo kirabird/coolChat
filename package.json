@@ -7,7 +7,7 @@
     "test": "jest",
     "build": "webpack",
     "dev": "webpack-dev-server --hot --mode development",
-    "start": "nodemon --open server/server.js",
+    "start": "nodemon server/server.js",
     "prestart": "npm run build"
   },
   "repository": {

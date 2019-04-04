@@ -21,7 +21,7 @@ module.exports = gql`
     username: String!
     message: String!
     created_at: String!
-    chatroom_id: String!
+    chatroom_id: Int
   }
 
   type UserSuccess {
@@ -31,7 +31,7 @@ module.exports = gql`
 
   type Chatroom {
     chatroom_name: String!
-    _id: Int!
+    _id: Int
   }
 
   type ChatroomSuccess {
@@ -48,9 +48,9 @@ module.exports = gql`
     createUser(userName: String!, password: String!): UserSuccess
     login(username: String!, password: String!): AuthenticationSuccess
     createMessage(
-      userId: Int!
+      user_id: Int!
       message: String!
-      chatroomId: String!
+      chatroom_id: Int
     ): MessageResponse
     createChatroom(chatroomName: String!): ChatroomSuccess
   }
