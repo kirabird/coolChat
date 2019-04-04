@@ -4,10 +4,11 @@ export default gql`
   subscription messageAdded {
     messageAdded {
       mutation
-      message { 
+      message {
         username
         message
         created_at
+        chatroom_id
       }
     }
   }

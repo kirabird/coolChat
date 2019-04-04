@@ -10,53 +10,35 @@ import { split } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
 import App from './App';
 
-// import { setContext } from 'apollo-link-context'
-// import { AUTH_TOKEN } from './constants'
-
-
 const wsLink = new WebSocketLink({
   //uri: 'ws://192.168.10.139:4000/graphql',
   uri: 'ws://localhost:4000/graphql',
   options: {
-    reconnect: true,
-  },
+    reconnect: true
+  }
 });
-
-// const authLink = setContext((_, { headers }) => {
-//   const token = localStorage.getItem(AUTH_TOKEN)
-//   return {
-//     headers: {
-//       ...headers,
-//       authorization: token ? `Bearer ${token}` : ''
-//     }
-//   }
-// })
 
 const cache = new InMemoryCache();
 const httpLink = new HttpLink({
   // uri: 'http://192.168.10.139:4000/graphql',
-  uri: 'http://localhost:4000/graphql',
+  uri: 'http://localhost:4000/graphql'
 });
 
 // queries and mutations go over http and subscriptions over websockets
 const link = split(
   ({ query }) => {
     const { kind, operation } = getMainDefinition(query);
+    console.log('KIND, ', kind, 'OPERATION', operation);
     return kind === 'OperationDefinition' && operation === 'subscription';
   },
   wsLink,
-  httpLink,
+  httpLink
 );
 
 const client = new ApolloClient({
   cache,
-  link,
+  link
 });
-
-// const client = new ApolloClient({
-//   link: authLink.concat(httpLink),
-//   cache: new InMemoryCache()
-// })
 
 render(
   <ApolloProvider client={client}>
@@ -64,5 +46,5 @@ render(
       <App />
     </BrowserRouter>
   </ApolloProvider>,
-  document.querySelector('#root'),
+  document.querySelector('#root')
 );

@@ -6,6 +6,7 @@ export const messageQuery = gql`
       username
       message
       created_at
+      chatroom_id
     }
   }
 `;
@@ -13,5 +14,12 @@ export const messageQuery = gql`
 export const userQuery = gql`
   {
     users
+  }
+`;
+
+export const chatroomQuery = gql`
+  {
+    chatroom_name
+    _id
   }
 `;

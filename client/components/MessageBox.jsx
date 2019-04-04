@@ -6,15 +6,16 @@ import { createMessage } from '../schema/mutations';
 
 const styles = {
   container: {
+    color: 'pink',
     display: 'flex',
-    padding: '10px',
+    padding: '10px'
   },
   textField: {
-    flexGrow: 9,
+    flexGrow: 9
   },
   button: {
-    flexGrow: 1,
-  },
+    flexGrow: 1
+  }
 };
 
 class MessageBox extends Component {
@@ -22,7 +23,7 @@ class MessageBox extends Component {
     super(props);
 
     this.state = {
-      content: '',
+      content: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -43,7 +44,7 @@ class MessageBox extends Component {
   render() {
     const { content } = this.state;
     return (
-      <div className="messageBox" style={styles.container}>
+      <div className='messageBox' style={styles.container}>
         <TextField
           value={content}
           onChange={this.handleChange}
@@ -54,17 +55,20 @@ class MessageBox extends Component {
           {(newMsg, { data }) => (
             <Button
               onClick={() => {
-                console.log(this.state.content)
+                {
+                  /* console.log(this.state.content); */
+                }
                 newMsg({
                   variables: {
-                    userId: 1,
+                    user_id: 1,
                     message: this.state.content,
-                  },
+                    chatroom_id: 1
+                  }
                 });
                 this.setState({ content: '' });
               }}
             >
-                Send
+              Send
             </Button>
           )}
         </Mutation>
