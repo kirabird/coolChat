@@ -57,7 +57,7 @@ class MessageBox extends Component {
                 console.log(this.state.content)
                 newMsg({
                   variables: {
-                    userId: 2,
+                    userId: 1,
                     message: this.state.content,
                   },
                 });

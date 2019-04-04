@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
 
-  entry: './client/index.jsx',
+  entry: ['babel-polyfill', './client/index.jsx'],
   mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'),
