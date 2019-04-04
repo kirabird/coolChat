@@ -69,49 +69,53 @@ class AuthContainer extends Component {
           />
 
           <div style={{ display: 'flex' }}>
-            <Mutation mutation={createUser}>
-              {createUserMutation => (
+            <Mutation mutation={signup}>
+              {signupMutation => (
                 <Button
                   variant="contained"
                   color="primary"
                   style={styles.button}
-                  onClick={() => createUserMutation({
-                    variables: {
-                      username: this.state.username,
-                      password: this.state.password,
-                    },
-                  }).then((res) => {
-                    console.log('!!!Signup', res);
-                    if (res.data.login.success) {
-                      history.push('/chat');
-                    } else {
-                      return <h4>404</h4>;
-                    }
-                  })
+                  onClick={() =>
+                    signupMutation({
+                      variables: {
+                        userName: this.state.username,
+                        password: this.state.password,
+                      },
+                    }).then(res => {
+                      console.log('THIS IS RES', res);
+                      if (res.data.signup.success) {
+                        history.push('/chat');
+                      } else {
+                        return <h4>404</h4>;
+                      }
+                    })
                   }
                 >
-                  Login
+                  Signup
                 </Button>
               )}
             </Mutation>
+
             <Mutation mutation={login}>
               {loginMutation => (
                 <Button
                   variant="contained"
                   color="primary"
                   style={styles.button}
-                  onClick={() => loginMutation({
-                    variables: {
-                      username: this.state.username,
-                      password: this.state.password,
-                    },
-                  }).then((res) => {
-                    if (res.data.login.success) {
-                      history.push('/chat');
-                    } else {
-                      return <h4>404</h4>;
-                    }
-                  })
+                  onClick={() =>
+                    loginMutation({
+                      variables: {
+                        username: this.state.username,
+                        password: this.state.password,
+                      },
+                    }).then(res => {
+                      console.log('res from login', res);
+                      if (res.data.login.success) {
+                        history.push('/chat');
+                      } else {
+                        return <h4>404</h4>;
+                      }
+                    })
                   }
                 >
                   Login
@@ -123,6 +127,13 @@ class AuthContainer extends Component {
       </div>
     );
   }
+  // _confirm = async () => {
+  //   // ... you'll implement this 🔜
+  // }
+
+  _saveUserData = token => {
+    localStorage.setItem(AUTH_TOKEN, token);
+  };
 }
 
 // AuthContainer.propTypes = {

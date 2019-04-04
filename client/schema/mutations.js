@@ -17,14 +17,14 @@ export const createMessage = gql`
   }
 `;
 
-export const createUser = gql`
-  mutation($userName: String!, $password: String!) {
-    createUser(userName: $userName) {
-      username
-      password
-    }
-  }
-`;
+// export const createUser = gql`
+//   mutation($userName: String!, $password: String!) {
+//     createUser(userName: $userName, password: $password) {
+//       username
+//       password
+//     }
+//   }
+// `;
 
 export const login = gql`
   mutation($username: String!, $password: String!) {
@@ -39,6 +39,15 @@ export const createChatroom = gql`
   mutation($chatroom_name: String!) {
     createChatroom(chatroom_name: $chatroom_name) {
       chatroom_name
+    }
+  }
+`;
+
+export const signup = gql`
+  mutation($userName: String!, $password: String!) {
+    signup(userName: $userName, password: $password) {
+      username
+      success
     }
   }
 `;
