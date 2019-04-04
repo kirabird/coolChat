@@ -25,9 +25,7 @@ class AuthContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-
-    };
+    this.state = {};
   }
 
   render() {
@@ -36,26 +34,28 @@ class AuthContainer extends Component {
     return (
       <div className="auth">
         <form style={styles.container} noValidate autoComplete="off">
-          <TextField
-            id="usernameInput"
-            label="Username"
-            margin="normal"
-            variant="outlined"
-          />
+          <TextField id="usernameInput" label="Username" margin="normal" variant="outlined" />
 
-          <TextField
-            id="passwordInput"
-            label="Password"
-            margin="normal"
-            variant="outlined"
-          />
+          <TextField id="passwordInput" label="Password" margin="normal" variant="outlined" />
 
-          <div style={{ display: 'flex' }}>
-            <Button variant="contained" color="primary" style={styles.button}>
+          <div className="buttonsDiv" style={{ display: 'flex' }}>
+            <Button
+              onClick={handleSignUp}
+              className="signUp"
+              variant="contained"
+              color="primary"
+              style={styles.button}
+            >
               Sign Up
             </Button>
 
-            <Button variant="contained" color="primary" style={styles.button}>
+            <Button
+              onClick={handleLogin}
+              className="login"
+              variant="contained"
+              color="primary"
+              style={styles.button}
+            >
               <Link to="/chat" style={{ color: '#FFF', textDecoration: 'none' }}>
                 Login
               </Link>
