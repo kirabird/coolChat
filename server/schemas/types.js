@@ -4,6 +4,7 @@ module.exports = gql`
   type Query {
     messages: [Message]
     users: [String]
+    chatrooms: [Chatroom]
   }
 
   type MessageResponse {
@@ -11,7 +12,7 @@ module.exports = gql`
     mutation: String!
   }
 
-  type Message{
+  type Message {
     username: String!
     message: String!
     created_at: String!
@@ -22,9 +23,19 @@ module.exports = gql`
     success: Boolean!
   }
 
+  type Chatroom {
+    chatroom_name: String!
+  }
+
+  type ChatroomSuccess {
+    chatroom_name: String!
+    success: Boolean!
+  }
+
   type Mutation {
     createUser(userName: String!, password: String!): UserSuccess
     createMessage(userId: Int!, message: String!): MessageResponse
+    createChatroom(chatroomName: String!): ChatroomSuccess
   }
 
   type Subscription {

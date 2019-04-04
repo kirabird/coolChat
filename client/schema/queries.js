@@ -15,3 +15,9 @@ export const userQuery = gql`
     users
   }
 `;
+
+export const chatroomQuery = gql`
+  {
+    chatroomName
+  }
+`;
