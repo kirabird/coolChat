@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import { Redirect } from 'react-router-dom';
 import history from '../history';
 import { Mutation, Query } from 'react-apollo';
-import { login } from '../schema/mutations.js';
+import { login, signup } from '../schema/mutations.js';
 // import { Router } from 'express';
 
 const styles = {
@@ -70,14 +70,34 @@ class AuthContainer extends Component {
           />
 
           <div style={{ display: 'flex' }}>
-            <Button
-              variant='contained'
-              color='primary'
-              style={styles.button}
-              onClick={this.handleSignUp}
-            >
-              Sign Up
-            </Button>
+          
+          <Mutation mutation={signup}>
+              {signupMutation => (
+                <Button
+                  variant='contained'
+                  color='primary'
+                  style={styles.button}
+                  onClick={() =>
+                    signupMutation({
+                      variables: {
+                        userName: this.state.username,
+                        password: this.state.password
+                      }
+                    }).then(res => {
+                      console.log('THIS IS RES', res)
+                      if (res.data.signup.success) {
+                        history.push('/chat');
+                      } else {
+                        return <h4>404</h4>;
+                      }
+                    })
+                  }
+                >
+                  Signup
+                </Button>
+              )}
+            </Mutation>
+
             <Mutation mutation={login}>
               {loginMutation => (
                 <Button
@@ -91,6 +111,7 @@ class AuthContainer extends Component {
                         password: this.state.password
                       }
                     }).then(res => {
+                      console.log('res from login', res)
                       if (res.data.login.success) {
                         history.push('/chat');
                       } else {
@@ -107,6 +128,13 @@ class AuthContainer extends Component {
         </form>
       </div>
     );
+  }
+  // _confirm = async () => {
+  //   // ... you'll implement this 🔜
+  // }
+
+  _saveUserData = token => {
+    localStorage.setItem(AUTH_TOKEN, token)
   }
 }
 

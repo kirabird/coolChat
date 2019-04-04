@@ -35,13 +35,14 @@ module.exports = {
   },
 
   // not verifying write to DB; errors unhandled
-  // createUser: async (_, { userName, password }) => {
-  //   const queryText =
-  //     'INSERT INTO users(username, password) VALUES ($1, $2) RETURNING username';
-  //   const values = [userName, password];
-  //   const { username } = (await query(queryText, values)).rows[0];
-  //   return { username, success: true };
-  // },
+  signup: async (_, { userName, password }) => {
+    const queryText =
+      'INSERT INTO users(username, password) VALUES ($1, $2) RETURNING username';
+    const values = [userName, password];
+    const { username } = (await query(queryText, values)).rows[0];
+    console.log(username)
+    return { username, success: true };
+  },
 
   login: async (_, { username, password }) => {
     const queryText = `SELECT password FROM users WHERE username='${username}'`;
