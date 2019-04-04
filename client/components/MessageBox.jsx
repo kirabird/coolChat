@@ -55,14 +55,15 @@ class MessageBox extends Component {
           {(newMsg, { data }) => (
             <Button
               onClick={() => {
-                console.log(this.state.content);
+                {
+                  /* console.log(this.state.content); */
+                }
                 newMsg({
                   variables: {
-                    userId: 1,
-
+                    user_id: 1,
                     message: this.state.content,
-                  },
-
+                    chatroom_id: 1
+                  }
                 });
                 this.setState({ content: '' });
               }}

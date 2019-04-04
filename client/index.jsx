@@ -14,29 +14,30 @@ const wsLink = new WebSocketLink({
   //uri: 'ws://192.168.10.139:4000/graphql',
   uri: 'ws://localhost:4000/graphql',
   options: {
-    reconnect: true,
-  },
+    reconnect: true
+  }
 });
 
 const cache = new InMemoryCache();
 const httpLink = new HttpLink({
   // uri: 'http://192.168.10.139:4000/graphql',
-  uri: 'http://localhost:4000/graphql',
+  uri: 'http://localhost:4000/graphql'
 });
 
 // queries and mutations go over http and subscriptions over websockets
 const link = split(
   ({ query }) => {
     const { kind, operation } = getMainDefinition(query);
+    console.log('KIND, ', kind, 'OPERATION', operation);
     return kind === 'OperationDefinition' && operation === 'subscription';
   },
   wsLink,
-  httpLink,
+  httpLink
 );
 
 const client = new ApolloClient({
   cache,
-  link,
+  link
 });
 
 render(
@@ -45,5 +46,5 @@ render(
       <App />
     </BrowserRouter>
   </ApolloProvider>,
-  document.querySelector('#root'),
+  document.querySelector('#root')
 );
