@@ -6,6 +6,7 @@ import { createMessage } from '../schema/mutations';
 
 const styles = {
   container: {
+    color: 'pink',
     display: 'flex',
     padding: '10px'
   },
