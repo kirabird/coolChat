@@ -7,6 +7,13 @@ IF NOT EXISTS users
 );
 
 CREATE TABLE
+IF NOT EXISTS chatrooms
+(
+  "_id" SERIAL PRIMARY KEY,
+  "chatroom_name" VARCHAR NOT NULL
+);
+
+CREATE TABLE
 IF NOT EXISTS messages
 (
   "_id" SERIAL PRIMARY KEY,
@@ -25,13 +32,6 @@ DELETE CASCADE,
 REFERENCES chatrooms
 ("_id") ON
 DELETE CASCADE
-);
-
-CREATE TABLE
-IF NOT EXISTS chatrooms
-(
-  "_id" PRIMARY KEY DEFAULT 1,
-  "chatroom_name" VARCHAR NOT NULL
 );
 
 CREATE TABLE

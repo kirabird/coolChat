@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Redirect } from 'react-router-dom';
-import history from '../history';
 import { Mutation, Query } from 'react-apollo';
-import { login } from '../schema/mutations.js';
+import history from '../history';
+import { login, createUser } from '../schema/mutations';
 // import { Router } from 'express';
 
 const styles = {
@@ -17,22 +17,21 @@ const styles = {
     width: '400px',
     marginTop: '50px',
     flexDirection: 'column',
-    padding: '15px'
+    padding: '15px',
   },
   button: {
     flexGrow: 1,
-    margin: '5px'
-  }
+    margin: '5px',
+  },
 };
 
 class AuthContainer extends Component {
   constructor(props) {
     super(props);
 
-
     this.state = {
       username: '',
-      password: ''
+      password: '',
     };
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -51,52 +50,68 @@ class AuthContainer extends Component {
     // const { handleSignUp, handleLogin } = this.props;
 
     return (
-      <div className='auth'>
-        <form style={styles.container} noValidate autoComplete='off'>
+      <div className="auth">
+        <form style={styles.container} noValidate autoComplete="off">
           <TextField
-            id='usernameInput'
-            label='Username'
-            margin='normal'
-            variant='outlined'
+            id="usernameInput"
+            label="Username"
+            margin="normal"
+            variant="outlined"
             onChange={e => this.setState({ username: e.target.value })}
           />
 
           <TextField
-            id='passwordInput'
-            label='Password'
-            margin='normal'
-            variant='outlined'
+            id="passwordInput"
+            label="Password"
+            margin="normal"
+            variant="outlined"
             onChange={e => this.setState({ password: e.target.value })}
           />
 
           <div style={{ display: 'flex' }}>
-            <Button
-              variant='contained'
-              color='primary'
-              style={styles.button}
-              onClick={this.handleSignUp}
-            >
-              Sign Up
-            </Button>
+            <Mutation mutation={createUser}>
+              {createUserMutation => (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={styles.button}
+                  onClick={() => createUserMutation({
+                    variables: {
+                      username: this.state.username,
+                      password: this.state.password,
+                    },
+                  }).then((res) => {
+                    console.log('!!!Signup', res);
+                    if (res.data.login.success) {
+                      history.push('/chat');
+                    } else {
+                      return <h4>404</h4>;
+                    }
+                  })
+                  }
+                >
+                  Login
+                </Button>
+              )}
+            </Mutation>
             <Mutation mutation={login}>
               {loginMutation => (
                 <Button
-                  variant='contained'
-                  color='primary'
+                  variant="contained"
+                  color="primary"
                   style={styles.button}
-                  onClick={() =>
-                    loginMutation({
-                      variables: {
-                        username: this.state.username,
-                        password: this.state.password
-                      }
-                    }).then(res => {
-                      if (res.data.login.success) {
-                        history.push('/chat');
-                      } else {
-                        return <h4>404</h4>;
-                      }
-                    })
+                  onClick={() => loginMutation({
+                    variables: {
+                      username: this.state.username,
+                      password: this.state.password,
+                    },
+                  }).then((res) => {
+                    if (res.data.login.success) {
+                      history.push('/chat');
+                    } else {
+                      return <h4>404</h4>;
+                    }
+                  })
                   }
                 >
                   Login
